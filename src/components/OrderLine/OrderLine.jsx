@@ -5,14 +5,12 @@ import OrderDetail from '../OrderDetail'
 import CustomerInitials from '../CustomerInitials'
 import getStatusColor from '../../utils/statusHelper'
 
-const missingImageUrl = 'https://www.icebox.com/assets/public/images/missing.png'
-
 const OrderContainer = styled.div`
   border: 1px solid grey;
   border-radius: 5px;
   height: 100px;
   padding: 10px 20px;
-  margin: 20px;
+  margin: 10px 0px;
   display: flex;
   justify-content: space-between;
   border-left: 15px solid ${props => getStatusColor(props.status)};
@@ -39,11 +37,11 @@ const OrderImage = styled.img`
   margin: 0 -100%;
 `
 
-const Order = ({ status, imageUrl, name, category, size, color, customerInitials }) => (
+const OrderLine = ({ status, imageUrl, name, category, size, color, customerInitials }) => (
   <OrderContainer status={status}>
     <ItemContainer>
       <ImageContainer>
-        <OrderImage src={imageUrl || missingImageUrl}/>
+        {imageUrl != null ? <OrderImage src={imageUrl}/> : <OrderImage src="/images/missing.png"/>}
       </ImageContainer>
       <OrderDetail detail={'Name'} value={name} color="white" isBold marginLeft="20px"/>
     </ItemContainer>
@@ -54,12 +52,12 @@ const Order = ({ status, imageUrl, name, category, size, color, customerInitials
   </OrderContainer>
 )
 
-Order.propTypes = {
+OrderLine.propTypes = {
   status: PropTypes.oneOf([
-    'ready',
+    'readyToTry',
     'onTheWay',
-    'InTheQueue',
-    'OutOfStock',
+    'inTheQueue',
+    'outOfStock',
   ]).isRequired,
   imageUrl: PropTypes.string,
   name: PropTypes.string.isRequired,
@@ -69,12 +67,11 @@ Order.propTypes = {
   customerInitials: PropTypes.string,
 }
 
-Order.defaultProps = {
-  imageUrl: missingImageUrl,
+OrderLine.defaultProps = {
   category: '',
   size: '',
   color: '',
   customerInitials: '',
 }
 
-export default Order
+export default OrderLine
