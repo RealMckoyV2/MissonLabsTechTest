@@ -32,14 +32,16 @@ const OrderPage = () => {
   })
 
   const updateFilters = (filter) => {
+    console.log(filter)
     const newFilters = filters
     if (newFilters.includes(filter)) {
-      newFilters.splice(newFilters.indexOf(filter, 1))
+      newFilters.splice(newFilters.indexOf(filter), 1)
     } else {
       newFilters.push(filter)
     }
 
     setFilters(newFilters)
+    console.log(filters)
   }
 
   const filterOrders = () => {
@@ -52,11 +54,13 @@ const OrderPage = () => {
 
   return (
     <PageContainer>
-      <Filter onFilterChange={(filter) => {
-        updateFilters(filter)
-        filterOrders()
-        setPage(0)
-      }}/>
+      <Filter
+        filters={filters}
+        onFilterChange={(filter) => {
+          updateFilters(filter)
+          filterOrders()
+          setPage(0)
+        }}/>
       {
         ordersToDisplay.map((order, index) => (
           <OrderLine

@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import getStatusColor from '../../utils/statusHelper'
 
@@ -18,8 +18,8 @@ const KeyItem = styled.div`
 const KeyColor = styled.div`
   width: 15px;
   height: 15px;
-  margin-right: 5px;
-  border: 1px solid grey;
+  margin: 5px;
+  border: 1px solid ${(props) => props.selected === true ? 'white' : 'grey'} ;
   border-radius: 50px;
   background-color: ${(props) => getStatusColor(props.status)};
   cursor: pointer;
@@ -32,28 +32,34 @@ const KeyName = styled.span`
   color: lightgrey;
 `
 
-const Filter = ({onFilterChange}) => (
+const Filter = ({ filters, onFilterChange }) => (
   <KeyContainer>
     <KeyItem>
-      <KeyColor status="readyToTry" onClick={() => onFilterChange("readyToTry")}/>
+      <KeyColor selected={filters.includes('readyToTry')} status="readyToTry"
+                onClick={() => onFilterChange('readyToTry')}/>
       <KeyName>Ready to try</KeyName>
     </KeyItem>
     <KeyItem>
-      <KeyColor status="onTheWay" onClick={() => onFilterChange("onTheWay")}/>
+      <KeyColor selected={filters.includes('onTheWay')} status="onTheWay" onClick={() => onFilterChange('onTheWay')}/>
       <KeyName>On the way</KeyName>
     </KeyItem>
     <KeyItem>
-      <KeyColor status="inTheQueue" onClick={() => onFilterChange("inTheQueue")}/>
+      <KeyColor selected={filters.includes('inTheQueue')} status="inTheQueue"
+                onClick={() => onFilterChange('inTheQueue')}/>
       <KeyName>In the queue</KeyName>
     </KeyItem>
     <KeyItem>
-      <KeyColor status="outOfStock" onClick={() => onFilterChange("outOfStock")}/>
+      <KeyColor selected={filters.includes('outOfStock')} status="outOfStock"
+                onClick={() => onFilterChange('outOfStock')}/>
       <KeyName>Out of stock</KeyName>
     </KeyItem>
   </KeyContainer>
 )
 
 Filter.propTypes = {
+  filters: PropTypes.arrayOf(
+    PropTypes.string,
+  ),
   onFilterChange: PropTypes.func.isRequired,
 }
 
