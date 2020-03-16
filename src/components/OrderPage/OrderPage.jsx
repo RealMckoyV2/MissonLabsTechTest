@@ -11,39 +11,52 @@ const PageContainer = styled.div`
 
 const OrderPage = () => {
   const pageSize = 4
-  const [filter, setFilter] = useState(null)
+  const [filters, setFilters] = useState([])
   const [page, setPage] = useState(0)
-
-  const filteredOrders = filter != null ?
-    fixtureData.filter(fixture => fixture.status === filter) :
-    fixtureData
+  const [filteredOrders, setFilteredOrders] = useState(fixtureData)
 
   const orderCount = filteredOrders.length
   const numOfPages = orderCount / pageSize
 
-  useEffect(() => {
-    if (numOfPages > 1) {
-      let nextPage
-
-      if (page >= numOfPages - 1) {
-        nextPage = 0
-      } else {
-        nextPage = (page + 1)
-      }
-      const id = setTimeout(() => setPage(nextPage), 2000)
-      return () => clearTimeout(id)
-    }
-  }, [page])
-
   const ordersToDisplay = filteredOrders.slice(page * pageSize, page * pageSize + pageSize)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (page >= numOfPages - 1) {
+        setPage(0)
+      } else {
+        setPage(page + 1)
+      }
+    }, 2000)
+    return () => clearInterval(interval)
+  })
+
+  const updateFilters = (filter) => {
+    const newFilters = filters
+    if (newFilters.includes(filter)) {
+      newFilters.splice(newFilters.indexOf(filter, 1))
+    } else {
+      newFilters.push(filter)
+    }
+
+    setFilters(newFilters)
+  }
+
+  const filterOrders = () => {
+    const filteredOrders = filters.length > 0 ?
+      fixtureData.filter(fixture => filters.includes(fixture.status)) :
+      fixtureData
+
+    setFilteredOrders(filteredOrders)
+  }
 
   return (
     <PageContainer>
-      <Filter onFilterChange={(value) => {
-        setFilter(value)
+      <Filter onFilterChange={(filter) => {
+        updateFilters(filter)
+        filterOrders()
         setPage(0)
-      }}
-      />
+      }}/>
       {
         ordersToDisplay.map((order, index) => (
           <OrderLine
@@ -58,7 +71,7 @@ const OrderPage = () => {
           />
         ))
       }
-      <Pagination currentPage={page} numOfPages={numOfPages} />
+      <Pagination currentPage={page} numOfPages={numOfPages}/>
     </PageContainer>
   )
 }
