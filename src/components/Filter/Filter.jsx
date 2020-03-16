@@ -29,7 +29,7 @@ const KeyName = styled.span`
   text-transform: uppercase;
   font-size: 0.6em;
   align-self: center;
-  color: lightgrey;
+  color: darkgrey;
 `
 
 const Filter = ({ filters, onFilterChange }) => (

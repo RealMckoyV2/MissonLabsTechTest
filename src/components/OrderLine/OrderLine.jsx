@@ -6,7 +6,7 @@ import CustomerInitials from '../CustomerInitials'
 import getStatusColor from '../../utils/statusHelper'
 
 const OrderContainer = styled.div`
-  border: 1px solid grey;
+  border: 1px solid darkgrey;
   border-radius: 5px;
   height: 100px;
   padding: 10px 20px;
@@ -43,7 +43,7 @@ const OrderLine = ({ status, imageUrl, name, category, size, color, customerInit
       <ImageContainer>
         {imageUrl != null ? <OrderImage src={imageUrl}/> : <OrderImage src="/images/missing.png"/>}
       </ImageContainer>
-      <OrderDetail detail={'Name'} value={name} color="white" isBold marginLeft="20px"/>
+      <OrderDetail value={name} color="white" isBold marginLeft="20px"/>
     </ItemContainer>
     <OrderDetail detail={'Category'} value={category}/>
     <OrderDetail detail={'Size'} value={size}/>

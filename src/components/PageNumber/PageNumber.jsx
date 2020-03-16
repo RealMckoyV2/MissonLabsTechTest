@@ -11,7 +11,7 @@ const PageContainer = styled.span`
 const CurrentPage = styled.span`
   width: 30px;
   height: 30px;
-  border-right: 1px solid grey;
+  border-right: 1px solid darkgrey;
   font-weight: 600;
   color: white;
   display: flex;

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PageDots from '../PageDots'
 import PageNumber from '../PageNumber'
+import PropTypes from 'prop-types'
 
 const Container = styled.div`
   display: flex;
@@ -24,5 +25,10 @@ const Pagination = ({ currentPage, numOfPages }) => (
     </ContentContainer>
   </Container>
 )
+
+Pagination.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  numOfPages: PropTypes.number.isRequired,
+}
 
 export default Pagination

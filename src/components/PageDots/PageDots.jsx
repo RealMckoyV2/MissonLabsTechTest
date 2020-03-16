@@ -12,7 +12,7 @@ const Dot = styled.div`
   width: 5px;
   height: 5px;
   border-radius: 50px;
-  background-color: lightgrey;
+  background-color: darkgrey;
   margin: 5px;
 `
 

@@ -32,7 +32,6 @@ const OrderPage = () => {
   })
 
   const updateFilters = (filter) => {
-    console.log(filter)
     const newFilters = filters
     if (newFilters.includes(filter)) {
       newFilters.splice(newFilters.indexOf(filter), 1)
@@ -41,7 +40,6 @@ const OrderPage = () => {
     }
 
     setFilters(newFilters)
-    console.log(filters)
   }
 
   const filterOrders = () => {

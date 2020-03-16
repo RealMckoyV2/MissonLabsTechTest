@@ -14,13 +14,13 @@ const Detail = styled.div`
 `
 const OrderDetail = ({ detail, value, color, isBold, marginLeft }) => (
   <Detail color={color} isBold={isBold} marginLeft={marginLeft}>
-    <div>{detail}:</div>
+    {detail != null ? <div>{detail}:</div> : null}
     <div>{value}</div>
   </Detail>
 )
 
 OrderDetail.propTypes = {
-  detail: PropTypes.string.isRequired,
+  detail: PropTypes.string,
   value: PropTypes.string,
   color: PropTypes.string,
   isBold: PropTypes.bool,
@@ -28,10 +28,11 @@ OrderDetail.propTypes = {
 }
 
 OrderDetail.defaultProps = {
+  detail: null,
   value: '',
-  color: 'grey',
+  color: 'light-grey',
   isBold: false,
-  marginLeft: "0px",
+  marginLeft: '0px',
 }
 
 export default OrderDetail

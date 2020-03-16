@@ -5,6 +5,6 @@ const statusColors = {
   outOfStock: '#F02828',
 }
 
-const getStatusColor = (status) => statusColors[status] || "grey";
+const getStatusColor = (status) => statusColors[status] || "darkgrey";
 
 export default getStatusColor;
