@@ -12,15 +12,7 @@ const Dot = styled.div`
   width: 5px;
   height: 5px;
   border-radius: 50px;
-  background-color: darkgrey;
-  margin: 5px;
-`
-
-const ActiveDot = styled.div`
-  width: 5px;
-  height: 5px;
-  border-radius: 50px;
-  background-color: green;
+  background-color: ${(props) => props.active ? 'green' : 'darkgrey'};
   margin: 5px;
 `
 
@@ -28,7 +20,7 @@ const PageDots = ({ currentPage, numOfPages }) => {
   const dots = []
   for (let i = 0; i < numOfPages; i++) {
     if (currentPage === i) {
-      dots.push(<ActiveDot key={i}/>)
+      dots.push(<Dot key={i} active/>)
     } else {
       dots.push(<Dot key={i}/>)
     }

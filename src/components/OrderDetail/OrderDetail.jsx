@@ -14,7 +14,7 @@ const Detail = styled.div`
 `
 const OrderDetail = ({ detail, value, color, isBold, marginLeft }) => (
   <Detail color={color} isBold={isBold} marginLeft={marginLeft}>
-    {detail != null ? <div>{detail}:</div> : null}
+    {detail ? <div>{detail}:</div> : null}
     <div>{value}</div>
   </Detail>
 )
