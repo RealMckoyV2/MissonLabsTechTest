@@ -27,7 +27,7 @@ const OrderPage = () => {
       } else {
         setPage(page + 1)
       }
-    }, 2000)
+    }, 10000)
     return () => clearInterval(interval)
   })
 
